@@ -1,11 +1,15 @@
 const express = require('express');
-const userSignUpController = require('../controller/userSignUp');
-const userSignInController = require('../controller/userSignin');
-const userDetailsController = require('../controller/userDetails');
+const userSignUpController = require('../controller/user/userSignUp');
+const userSignInController = require('../controller/user/userSignin');
+const userDetailsController = require('../controller/user/userDetails');
 const authToken = require('../middleware/authToken');
-const userLogout = require('../controller/userLogout');
-const allUsers = require('../controller/allUsers');
-const updateUser = require('../controller/updateUser');
+const userLogout = require('../controller/user/userLogout');
+const allUsers = require('../controller/user/allUsers');
+const updateUser = require('../controller/user/updateUser');
+const UploadProductController = require('../controller/product/uploadProduct');
+const getProductsController = require('../controller/product/products');
+const updateProductController = require('../controller/product/updateProduct');
+const getCategoryProduct = require('../controller/product/getCategoryProduct');
 
 const router = express.Router();
 
@@ -17,5 +21,11 @@ router.get('/user-details', authToken, userDetailsController);
 //admin panel routes
 router.get('/all-users', authToken, allUsers);
 router.post('/update-user', authToken, updateUser);
+
+//product
+router.post('/upload-product', authToken, UploadProductController);
+router.put('/update-product', authToken, updateProductController);
+router.get('/products', getProductsController);
+router.get('/get-categoryProduct', getCategoryProduct);
 
 module.exports = router;
